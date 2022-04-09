@@ -69,11 +69,12 @@ lm_fit %>%
   extract_fit_parsnip() %>%
   tidy()
 
-prediction = 11.44461078 + 0.71159854*.5 + 2.27452698*.1 + 0.57539495*.3 +
-  5.19625190*4 + -4.18760562*1 + -1.02601690*2 + 1.39323286*1 + 
-  -3.08668657*.5*.1 + -0.22000751*1*1
+predict_values = data.frame(type = "F", longest_shell = .5, diameter = .1, height = .3, whole_weight = 4, 
+                            shucked_weight = 1, viscera_weight = 2, shell_weight = 1)
+prediction = predict(lm_fit, predict_values)
 prediction
 ```
+The predicted age of the hypothetical abalone is 23.10256.
 
 7. 
 ```{r}
@@ -87,6 +88,6 @@ predicted_actual_ages
 
 set(predicted_actual_ages, truth = age, estimate = .pred)
 ```
-The $R^2$ is 0.5527866, the RMSE is 2.1611731, and the MAE is 1.5670545.
-About 55.3% of the variability in age can be explained using type, longest_shell,
+The $R^2$ is 0.5570949, the RMSE is 2.1507378, and the MAE is 1.5543719.
+About 55.7% of the variability in age can be explained using type, longest_shell,
 diameter, height, whole_weight, shucked_weight, viscera_weight, and shell_weight.
